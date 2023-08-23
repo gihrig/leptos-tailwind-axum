@@ -6,6 +6,11 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[package.metadata.x]
+ls = "ls -alh"
+dev = "cargo leptos watch"
+style = "npx tailwindcss -i ./input.css -o ./style/output.css --watch"
+
 [dependencies]
 axum = { version = "0.6.18", optional = true }
 console_error_panic_hook = "0.1.7"
