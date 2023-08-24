@@ -100,3 +100,91 @@ You'll need to install trunk to client side render this bundle.
 
 1. `cargo install trunk`
    Then the site can be served with `trunk serve --open`
+
+----------------------------------------------------------------
+Project Modifications - A work in progress
+----------------------------------------------------------------
+
+Config TailwindCSS for Leptos Rust project
+
+Begin with leptos-tailwind-axum example project
+
+```code
+Install cargo-x
+	cargo install cargo-x
+	Configure tasks in cargo.toml e.g.
+		[package.metadata.x]
+		ls = "ls -alh"
+		dev = "cargo leptos watch"
+		style = "npx tailwindcss -i ./input.css -o ./style/output.css --watch"
+
+Install TailwindCSS and accessories
+	npm remove tailwindcss
+	npm install -D tailwindcss prettier prettier-plugin-tailwindcss
+	Add tailwind plugin to Prettier config:
+		// prettier.config.js
+		module.exports = {
+		  plugins: ['prettier-plugin-tailwindcss'],
+		}
+
+Install VSCode extension "TailwindCSS kit"
+Add rust to Tailwind CSS IntelliSense extension settings
+	Open settings, search "@ext:bradlc.vscode-tailwindcss include Languages"
+		Add "rust HTML"
+
+Install VSCode extension "Prettier - Code formatter (Rust)
+	Create '.prettierrc.json'test
+	{
+		"useTabs": false,
+		"tabWidth": 4,
+		"printWidth": 80,
+		"endOfLine": "lf",
+		"overrides": [{ "files": "**/*.rs" }]
+	}
+
+Add target to exclude list
+	open settings, search "@ext:bradlc.vscode-tailwindcss files exclude"
+		Add "**/target/**
+
+Features:
+
+Start dev environment from separate terminals:
+	x dev
+	x style
+
+Tailwind Intellisense ***
+---------------------
+	Tailwind utility class sorting on save
+	Tailwind utility class css details on hover
+	Tailwind utility class suggestions on typing partial or CTRL-Space when hovering
+	Tailwind color class swatch (automatic)
+
+Tailwind Fold ***
+-------------
+	Ctrl-Alt-A - His show tailwind utility classes (cursor not in tailwind class attr)
+
+Tailwind Config Viewer
+----------------------
+	Click Tailwind Config Viewer icon in left command panel
+	--> shows entire tailwind class list, not local tailwind.config.js
+
+Tailwind Docs
+-------------
+	Open Command Pallet (Cmd-Sht-P) search for 'tailwind D {feature}'
+	Opens tailwind Docs in VSCode Simple Browser
+
+Tailwind Documentation
+----------------------
+	Cmd-Ctrl-t Opens Tailwind Docs in VSCode side bar
+
+Apply formatting, etc in Leptos Component and Server macros
+	Add to VSCode settings.json
+	"rust-analyzer.procMacro.ignored": {
+        "leptos_macro": [
+            "server",
+            "component"
+        ],
+    }
+
+*** Not working in .rs files
+```
